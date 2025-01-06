@@ -3,719 +3,746 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DigitalHub - Premium Digital Products</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-        }
-
-        :root {
-            --primary: #2563eb;
-            --primary-dark: #1d4ed8;
-            --text-color: #0f172a;
-            --light-bg: #f8fafc;
-            --border-color: #e2e8f0;
-            --card-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-            --hover-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-        }
-
-        body {
-            background-color: var(--light-bg);
-        }
-
-        .header {
-            background: white;
-            padding: 1rem 2rem;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .header-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary);
-            text-decoration: none;
-        }
-
-        .search-container {
-            flex: 1;
-            max-width: 500px;
-            margin: 0 2rem;
-            position: relative;
-        }
-
-        .search-input {
-            width: 100%;
-            padding: 0.8rem 1rem;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            font-size: 0.95rem;
-            background: var(--light-bg);
-            transition: all 0.3s ease;
-        }
-
-        .search-input:focus {
-            outline: none;
-            border-color: var(--primary);
-            background: white;
-        }
-
-        .cart-icon {
-            color: var(--text-color);
-            font-size: 1.5rem;
-            cursor: pointer;
-            position: relative;
-        }
-
-        .main-content {
-            max-width: 1200px;
-            margin: 7rem auto 2rem;
-            padding: 0 2rem;
-        }
-
-        .hero-section {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        .hero-title {
-            font-size: 2.5rem;
-            color: var(--text-color);
-            margin-bottom: 1rem;
-        }
-
-        .hero-subtitle {
-            font-size: 1.1rem;
-            color: #64748b;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .product-card {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: var(--card-shadow);
-            transition: all 0.3s ease;
-        }
-
-        .product-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--hover-shadow);
-        }
-
-        .product-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-
-        .product-info {
-            padding: 1.5rem;
-        }
-
-        .product-category {
-            font-size: 0.85rem;
-            color: var(--primary);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .product-title {
-            font-size: 1.25rem;
-            color: var(--text-color);
-            margin-bottom: 0.75rem;
-            font-weight: 600;
-        }
-
-        .product-price {
-            color: var(--text-color);
-            font-weight: 700;
-            font-size: 1.5rem;
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(15, 23, 42, 0.8);
-            backdrop-filter: blur(4px);
-            z-index: 2000;
-        }
-
-        .modal.active {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-content {
-            background: white;
-            padding: 2rem;
-            border-radius: 16px;
-            width: 90%;
-            max-width: 900px;
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-
-        .product-detail {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-        }
-
-        .detail-image {
-            width: 100%;
-            border-radius: 12px;
-            box-shadow: var(--card-shadow);
-        }
-
-        .detail-info h2 {
-            color: var(--text-color);
-            margin-bottom: 1rem;
-            font-size: 1.75rem;
-        }
-
-        .detail-description {
-            color: #64748b;
-            margin: 1rem 0;
-            line-height: 1.6;
-        }
-
-        .benefits-list {
-            margin: 1.5rem 0;
-            padding-left: 1.5rem;
-        }
-
-        .benefits-list li {
-            margin-bottom: 0.75rem;
-            color: #64748b;
-        }
-
-        .buy-button {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 1rem 2rem;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: 600;
-            width: 100%;
-            margin-top: 1rem;
-            transition: background-color 0.3s ease;
-        }
-
-        .buy-button:hover {
-            background: var(--primary-dark);
-        }
-
-        .checkout-form {
-            display: grid;
-            gap: 1.5rem;
-        }
-
-        .form-group {
-            display: grid;
-            gap: 0.5rem;
-        }
-
-        .form-group label {
-            font-weight: 500;
-            color: var(--text-color);
-        }
-
-        .form-group input,
-        .form-group select {
-            padding: 0.8rem;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .form-group input:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
-
-        .invoice {
-            background: white;
-            padding: 2rem;
-            border-radius: 12px;
-        }
-
-        .invoice h3 {
-            margin-bottom: 1.5rem;
-            color: var(--text-color);
-            font-size: 1.5rem;
-        }
-
-        .invoice-details {
-            border: 1px solid var(--border-color);
-            padding: 1.5rem;
-            border-radius: 8px;
-            margin-bottom: 1.5rem;
-        }
-
-        .invoice-details p {
-            margin-bottom: 0.75rem;
-            color: #64748b;
-        }
-
-        .payment-info {
-            background: var(--light-bg);
-            padding: 1.5rem;
-            border-radius: 8px;
-            margin-top: 1.5rem;
-        }
-
-        .qris-code {
-            display: block;
-            margin: 1.5rem auto;
-            max-width: 200px;
-            border-radius: 8px;
-        }
-
-        @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .search-container {
-                margin: 1rem 0;
-                max-width: 100%;
-            }
-
-            .product-detail {
-                grid-template-columns: 1fr;
-            }
-
-            .hero-title {
-                font-size: 2rem;
-            }
-
-            .product-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    <title>Digital Store</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
+<style>:root {
+    --primary-color: #03ac0e;
+    --secondary-color: #007bff;
+    --text-color: #2c3e50;
+    --light-gray: #f8f9fa;
+    --border-color: #e9ecef;
+    --shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+body {
+    background-color: var(--light-gray);
+    color: var(--text-color);
+}
+
+.navbar {
+    background: white;
+    padding: 1rem 0;
+    box-shadow: var(--shadow);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+}
+
+.nav-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.nav-search {
+    flex: 1;
+    margin: 0 2rem;
+    display: flex;
+}
+
+.nav-search input {
+    flex: 1;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px 0 0 4px;
+    outline: none;
+}
+
+.nav-search button {
+    padding: 0.5rem 1rem;
+    background: var(--primary-color);
+    border: none;
+    color: white;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+}
+
+.hero {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    text-align: center;
+    padding: 3rem 1rem;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.product-card {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: transform 0.2s ease;
+    position: relative;
+    cursor: pointer;
+}
+
+.product-card:hover {
+    transform: translateY(-4px);
+}
+
+.product-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: var(--secondary-color);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+}
+
+.product-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.product-info {
+    padding: 1.5rem;
+}
+
+.product-name {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+}
+
+.product-price {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.product-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.rating {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.stars {
+    color: #ffc107;
+}
+
+.rating-count {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.buy-button {
+    width: 100%;
+    padding: 0.75rem;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.buy-button:hover {
+    background-color: #028f0c;
+}
+
+.popup-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+
+.popup {
+    background: white;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+}
+
+.popup-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.popup-close {
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #666;
+}
+
+.popup-content {
+    padding: 1.5rem;
+}
+
+.product-summary {
+    margin-bottom: 1.5rem;
+}
+
+.product-description {
+    color: #666;
+    margin: 0.5rem 0;
+}
+
+.popup-price {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.purchase-form {
+    margin-top: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    outline: none;
+}
+
+.payment-info {
+    margin: 1rem 0;
+    padding: 1rem;
+    background: var(--light-gray);
+    border-radius: 4px;
+}
+
+.payment-info img {
+    max-width: 100%;
+    height: auto;
+    margin-top: 1rem;
+}
+
+.submit-button {
+    width: 100%;
+    padding: 1rem;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.invoice {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+
+.invoice-content {
+    background: white;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 600px;
+    padding: 2rem;
+}
+
+.invoice-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--primary-color);
+}
+
+.invoice-body {
+    margin-bottom: 2rem;
+}
+
+.customer-details,
+.product-details {
+    margin-bottom: 1.5rem;
+}
+
+.customer-details h3,
+.product-details h3 {
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+.product-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.invoice-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.close-invoice,
+.print-invoice {
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.close-invoice {
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+}
+
+.print-invoice {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+}
+
+.footer {
+    background: #2c3e50;
+    color: white;
+    padding: 3rem 0 1rem;
+    margin-top: 4rem;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.footer-section h3 {
+    margin-bottom: 1rem;
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.social-links a {
+    color: white;
+    font-size: 1.5rem;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+@media (max-width: 768px) {
+    .nav-content {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .nav-search {
+        margin: 1rem 0;
+        width: 100%;
+    }
+    
+    .hero h1 {
+        font-size: 2rem;
+    }
+    
+    .product-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+    
+    .popup {
+        width: 95%;
+        margin: 1rem;
+    }
+}</style>
 <body>
-    <header class="header">
-        <div class="header-content">
-            <a href="#" class="logo">DigitalHub</a>
-            <div class="search-container">
-                <input type="text" class="search-input" placeholder="Search digital products...">
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="nav-brand">DigitalStore</div>
+            <div class="nav-search">
+                <input type="text" placeholder="Search products...">
+                <button><i class="fas fa-search"></i></button>
             </div>
-            <div class="cart-icon">🛒</div>
+            <div class="nav-cart">
+                <i class="fas fa-shopping-cart"></i>
+            </div>
         </div>
-    </header>
+    </nav>
 
-    <main class="main-content">
-        <section class="hero-section">
-            <h1 class="hero-title">Premium Digital Products</h1>
-            <p class="hero-subtitle">Discover high-quality digital resources to accelerate your growth</p>
-        </section>
-        
-        <div class="product-grid" id="productGrid"></div>
-    </main>
-
-    <div class="modal" id="productModal">
-        <div class="modal-content"></div>
+    <div class="hero">
+        <h1>Premium Digital Products</h1>
+        <p>High-quality templates, themes, and digital assets</p>
     </div>
 
-    <script>
-        const products = [
-            {
-                id: 1,
-                name: "Complete Digital Marketing Masterclass",
-                category: "Course",
-                price: 1499000,
-                image: "https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg",
-                description: "Master digital marketing with our comprehensive course led by industry experts",
-                benefits: [
-                    "36 hours of video content",
-                    "Official certification",
-                    "Personal consultation",
-                    "Exclusive mentoring group",
-                    "Lifetime updates"
-                ]
-            },
-            {
-                id: 2,
-                name: "Premium Website Templates Bundle",
-                category: "Templates",
-                price: 899000,
-                image: "https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg",
-                description: "Professional website templates ready for your next project",
-                benefits: [
-                    "100+ page templates",
-                    "Responsive design",
-                    "SEO optimized",
-                    "6 months support",
-                    "Complete source code"
-                ]
-            },
-            {
-                id: 3,
-                name: "Online Business Success Blueprint",
-                category: "Ebook",
-                price: 499000,
-                image: "https://images.pexels.com/photos/926390/pexels-photo-926390.jpeg",
-                description: "Comprehensive guide to starting and scaling your online business",
-                benefits: [
-                    "10 premium ebooks",
-                    "Success case studies",
-                    "Business plan templates",
-                    "Practical workbooks",
-                    "Regular content updates"
-                ]
-            }
-        ];
-
-        const formatPrice = (price) => {
-            return new Intl.NumberFormat('id-ID', {
-                style: 'currency',
-                currency: 'IDR'
-            }).format(price);
-        };
-
-        const renderProducts = () => {
-            const productGrid = document.getElementById('productGrid');
-            productGrid.innerHTML = products.map(product => `
-                <div class="product-card" onclick="showProductDetail(${product.id})">
-                    <img src="${product.image}" alt="${product.name}" class="product-image">
-                    <div class="product-info">
-                        <div class="product-category">${product.category}</div>
-                        <h3 class="product-title">${product.name}</h3>
-                        <p class="product-price">${formatPrice(product.price)}</p>
+    <div class="container">
+        <div class="product-grid">
+            <div class="product-card" onclick="openPopup('Premium WordPress Theme', 'Rp499.000', 'Modern and responsive WordPress theme perfect for businesses')">
+                <div class="product-badge">Best Seller</div>
+                <img src="https://via.placeholder.com/300x200/3498db/ffffff?text=WordPress+Theme" alt="WordPress Theme" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">Premium WordPress Theme</h3>
+                    <div class="product-price">Rp499.000</div>
+                    <div class="product-meta">
+                        <div class="rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span class="rating-count">(125+ sold)</span>
+                        </div>
                     </div>
+                    <button class="buy-button">Buy Now</button>
                 </div>
-            `).join('');
-        };
+            </div>
 
-        const showProductDetail = (productId) => {
-            const product = products.find(p => p.id === productId);
-            const modal = document.getElementById('productModal');
-            const modalContent = modal.querySelector('.modal-content');
-
-            modalContent.innerHTML = `
-                <div class="product-detail">
-                    <div>
-                        <img src="${product.image}" alt="${product.name}" class="detail-image">
+            <div class="product-card" onclick="openPopup('Social Media Template Pack', 'Rp299.000', '50+ Instagram and Facebook post templates')">
+                <div class="product-badge">Popular</div>
+                <img src="https://via.placeholder.com/300x200/e74c3c/ffffff?text=Social+Media+Pack" alt="Social Media Templates" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">Social Media Template Pack</h3>
+                    <div class="product-price">Rp299.000</div>
+                    <div class="product-meta">
+                        <div class="rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half"></i>
+                            </div>
+                            <span class="rating-count">(98+ sold)</span>
+                        </div>
                     </div>
-                    <div class="detail-info">
-                        <div class="product-category">${product.category}</div>
-                        <h2>${product.name}</h2>
-                        <p class="product-price">${formatPrice(product.price)}</p>
-                        <p class="detail-description">${product.description}</p>
-                        <h4>Benefits:</h4>
-                        <ul class="benefits-list">
-                            ${product.benefits.map(benefit => `<li>${benefit}</li>`).join('')}
-                        </ul>
-                        <button class="buy-button" onclick="showCheckoutForm(${product.id})">Buy Now</button>
-                    </div>
+                    <button class="buy-button">Buy Now</button>
                 </div>
-            `;
+            </div>
 
-            modal.classList.add('active');
-            modal.onclick = (e) => {
-                if (e.target === modal) modal.classList.remove('active');
-            };
-        };
+            <div class="product-card" onclick="openPopup('Premium Lightroom Presets', 'Rp199.000', '20 professional photo editing presets')">
+                <img src="https://via.placeholder.com/300x200/9b59b6/ffffff?text=Lightroom+Presets" alt="Lightroom Presets" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">Premium Lightroom Presets</h3>
+                    <div class="product-price">Rp199.000</div>
+                    <div class="product-meta">
+                        <div class="rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span class="rating-count">(75+ sold)</span>
+                        </div>
+                    </div>
+                    <button class="buy-button">Buy Now</button>
+                </div>
+            </div>
 
-        const showCheckoutForm = (productId) => {
-            const product = products.find(p => p.id === productId);
-            const modalContent = document.querySelector('.modal-content');
+            <div class="product-card" onclick="openPopup('Business Proposal Template', 'Rp399.000', 'Professional business proposal templates in Word and PDF')">
+                <div class="product-badge">New</div>
+                <img src="https://via.placeholder.com/300x200/2ecc71/ffffff?text=Business+Template" alt="Business Template" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">Business Proposal Template</h3>
+                    <div class="product-price">Rp399.000</div>
+                    <div class="product-meta">
+                        <div class="rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span class="rating-count">(45+ sold)</span>
+                        </div>
+                    </div>
+                    <button class="buy-button">Buy Now</button>
+                </div>
+            </div>
 
-            modalContent.innerHTML = `
-                <h2 style="margin-bottom: 1.5rem">Checkout</h2>
-                <form class="checkout-form" onsubmit="processCheckout(event, ${productId})">
+            <div class="product-card" onclick="openPopup('UI Kit Collection', 'Rp599.000', 'Complete UI kit with 500+ components')">
+                <div class="product-badge">Premium</div>
+                <img src="https://via.placeholder.com/300x200/f1c40f/ffffff?text=UI+Kit" alt="UI Kit" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">UI Kit Collection</h3>
+                    <div class="product-price">Rp599.000</div>
+                    <div class="product-meta">
+                        <div class="rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span class="rating-count">(150+ sold)</span>
+                        </div>
+                    </div>
+                    <button class="buy-button">Buy Now</button>
+                </div>
+            </div>
+
+            <div class="product-card" onclick="openPopup('Video Editing Pack', 'Rp449.000', 'Transitions, effects, and presets for video editors')">
+                <img src="https://via.placeholder.com/300x200/e67e22/ffffff?text=Video+Pack" alt="Video Pack" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">Video Editing Pack</h3>
+                    <div class="product-price">Rp449.000</div>
+                    <div class="product-meta">
+                        <div class="rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half"></i>
+                            </div>
+                            <span class="rating-count">(88+ sold)</span>
+                        </div>
+                    </div>
+                    <button class="buy-button">Buy Now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="popup-overlay" id="popupOverlay">
+        <div class="popup" id="popup">
+            <div class="popup-header">
+                <h3>Purchase Details</h3>
+                <span class="popup-close" onclick="closePopup()">×</span>
+            </div>
+            <div class="popup-content">
+                <div class="product-summary">
+                    <h4 id="popup-product-name"></h4>
+                    <p id="popup-product-description" class="product-description"></p>
+                    <div id="popup-product-price" class="popup-price"></div>
+                </div>
+                <form id="purchase-form" class="purchase-form">
                     <div class="form-group">
-                        <label>Full Name</label>
-                        <input type="text" name="name" required>
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" required>
                     </div>
                     <div class="form-group">
-                        <label>Email</label>
-                        <input type="email" name="email" required>
+                        <label for="email">Email</label>
+                        <input type="email" id="email" required>
                     </div>
                     <div class="form-group">
-                        <label>Payment Method</label>
-                        <select name="payment" required>
+                        <label for="payment">Payment Method</label>
+                        <select id="payment" required onchange="handlePaymentChange()">
                             <option value="">Select payment method</option>
-                            <option value="bank">Bank Transfer</option>
                             <option value="qris">QRIS</option>
+                            <option value="bank">Bank Transfer (BCA)</option>
                         </select>
                     </div>
-                    <button type="submit" class="buy-button">Process Payment</button>
+                    <div id="payment-info" class="payment-info"></div>
+                    <button type="submit" class="submit-button">Confirm Purchase</button>
                 </form>
-            `;
-        };
+            </div>
+        </div>
+    </div>
 
-        const processCheckout = (event, productId) => {
-            event.preventDefault();
-            const formData = new FormData(event.target);
-            const product = products.find(p => p.id === productId);
-
-            // Show loading state
-            const modalContent = document.querySelector('.modal-content');
-            modalContent.innerHTML = `
-                <div style="text-align: center; padding: 2rem;">
-                    <div class="spinner"></div>
-                    <p style="margin-top: 1rem; color: #64748b;">Processing your payment...</p>
+    <div class="invoice" id="invoice">
+        <div class="invoice-content">
+            <div class="invoice-header">
+                <h2>Purchase Invoice</h2>
+                <div class="invoice-number">INV/2024/001</div>
+            </div>
+            <div class="invoice-body">
+                <div class="customer-details">
+                    <h3>Customer Details</h3>
+                    <div id="customer-name"></div>
+                    <div id="customer-email"></div>
                 </div>
-            `;
-
-            // Simulate API call
-            setTimeout(() => {
-                showInvoice(product, {
-                    name: formData.get('name'),
-                    email: formData.get('email'),
-                    payment: formData.get('payment')
-                });
-            }, 1500);
-        };
-
-        const showInvoice = (product, customer) => {
-            const modalContent = document.querySelector('.modal-content');
-            const orderId = 'ORD' + Date.now().toString().slice(-6);
-            const paymentDetails = customer.payment === 'bank' 
-                ? 'Transfer to: BCA 1234567890 a.n. DigitalHub' 
-                : 'Scan the QRIS code below:';
-
-            modalContent.innerHTML = `
-                <div class="invoice">
-                    <h3>Purchase Invoice</h3>
-                    <div class="invoice-details">
-                        <p><strong>Order ID:</strong> ${orderId}</p>
-                        <p><strong>Product:</strong> ${product.name}</p>
-                        <p><strong>Price:</strong> ${formatPrice(product.price)}</p>
-                        <p><strong>Customer:</strong> ${customer.name}</p>
-                        <p><strong>Email:</strong> ${customer.email}</p>
+                <div class="product-details">
+                    <h3>Product Details</h3>
+                    <div class="product-row">
+                        <span id="invoice-product-name"></span>
+                        <span id="invoice-product-price"></span>
                     </div>
                     <div class="payment-info">
-                        <h4 style="margin-bottom: 1rem;">Payment Information:</h4>
-                        <p>${paymentDetails}</p>
-                        ${customer.payment === 'qris' ? `
-                            <img src="https://merchant.qris.interactive.co.id/m/login/assets/img/banner/1.2.png" 
-                                alt="QRIS Code" 
-                                class="qris-code">
-                        ` : ''}
-                        <p style="margin-top: 1rem; color: #64748b;">
-                            Please complete your payment within 24 hours. Digital products will be sent to your email after payment confirmation.
-                        </p>
-                    </div>
-                    <button class="buy-button" onclick="simulatePaymentConfirmation()">
-                        Confirm Payment
-                    </button>
-                </div>
-            `;
-        };
-
-        const simulatePaymentConfirmation = () => {
-            const modalContent = document.querySelector('.modal-content');
-            modalContent.innerHTML = `
-                <div style="text-align: center; padding: 2rem;">
-                    <div class="spinner"></div>
-                    <p style="margin-top: 1rem; color: #64748b;">Verifying payment...</p>
-                </div>
-            `;
-            
-            setTimeout(() => {
-                modalContent.innerHTML = `
-                    <div class="invoice" style="text-align: center;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2">
-                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                            <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                        </svg>
-                        <h3 style="color: #22c55e; margin: 1rem 0;">Payment Successful!</h3>
-                        <p style="color: #64748b; margin-bottom: 1rem;">Digital products have been sent to your email.</p>
-                        <p style="color: #64748b; margin-bottom: 2rem;">Thank you for shopping at DigitalHub!</p>
-                        <button class="buy-button" onclick="closeModal()" style="max-width: 200px; margin: 0 auto;">
-                            Back to Store
-                        </button>
-                    </div>
-                `;
-            }, 2000);
-        };
-
-        const closeModal = () => {
-            document.getElementById('productModal').classList.remove('active');
-        };
-
-        const searchInput = document.querySelector('.search-input');
-        searchInput.addEventListener('input', (e) => {
-            const searchTerm = e.target.value.toLowerCase();
-            const filteredProducts = products.filter(product => 
-                product.name.toLowerCase().includes(searchTerm) ||
-                product.description.toLowerCase().includes(searchTerm) ||
-                product.category.toLowerCase().includes(searchTerm)
-            );
-            
-            const productGrid = document.getElementById('productGrid');
-            if (filteredProducts.length === 0) {
-                productGrid.innerHTML = `
-                    <div style="grid-column: 1/-1; text-align: center; padding: 3rem;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2">
-                            <circle cx="11" cy="11" r="8"></circle>
-                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                        </svg>
-                        <h3 style="color: var(--text-color); margin-top: 1rem;">No products found</h3>
-                        <p style="color: #64748b; margin-top: 0.5rem;">Try different keywords</p>
-                    </div>
-                `;
-            } else {
-                renderProducts(filteredProducts);
-            }
-        });
-
-        // Cart functionality
-        const cartIcon = document.querySelector('.cart-icon');
-        let cartItems = [];
-
-        const updateCart = () => {
-            const cartBadge = document.querySelector('.cart-badge') || 
-                document.createElement('span');
-            cartBadge.className = 'cart-badge';
-            cartBadge.style.cssText = `
-                position: absolute;
-                top: -8px;
-                right: -8px;
-                background: var(--primary);
-                color: white;
-                border-radius: 50%;
-                padding: 2px 6px;
-                font-size: 12px;
-                font-weight: 600;
-                display: ${cartItems.length ? 'block' : 'none'};
-            `;
-            cartBadge.textContent = cartItems.length;
-            cartIcon.appendChild(cartBadge);
-        };
-
-        cartIcon.addEventListener('click', () => {
-            const modal = document.getElementById('productModal');
-            const modalContent = modal.querySelector('.modal-content');
-
-            if (cartItems.length === 0) {
-                modalContent.innerHTML = `
-                    <div class="invoice" style="text-align: center;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2">
-                            <circle cx="9" cy="21" r="1"></circle>
-                            <circle cx="20" cy="21" r="1"></circle>
-                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-                        </svg>
-                        <h3 style="margin: 1rem 0;">Your Cart is Empty</h3>
-                        <p style="color: #64748b; margin-bottom: 2rem;">Start exploring our digital products</p>
-                        <button class="buy-button" onclick="closeModal()" style="max-width: 200px; margin: 0 auto;">
-                            Browse Products
-                        </button>
-                    </div>
-                `;
-            } else {
-                const total = cartItems.reduce((sum, item) => sum + item.price, 0);
-                modalContent.innerHTML = `
-                    <div class="invoice">
-                        <h3>Shopping Cart</h3>
-                        <div class="cart-items">
-                            ${cartItems.map(item => `
-                                <div class="cart-item" style="display: flex; justify-content: space-between; align-items: center; padding: 1rem; border-bottom: 1px solid var(--border-color);">
-                                    <div>
-                                        <h4 style="color: var(--text-color); margin-bottom: 0.5rem;">${item.name}</h4>
-                                        <p style="color: var(--primary); font-weight: 600;">${formatPrice(item.price)}</p>
-                                    </div>
-                                    <button onclick="removeFromCart(${item.id})" style="color: #ef4444; background: none; border: none; cursor: pointer; padding: 0.5rem;">
-                                        ✕
-                                    </button>
-                                </div>
-                            `).join('')}
+                        <div class="payment-method">
+                            Payment Method: <span id="invoice-payment-method"></span>
                         </div>
-                        <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border-color);">
-                            <div style="display: flex; justify-content: space-between; margin-bottom: 1.5rem;">
-                                <h4>Total:</h4>
-                                <h4>${formatPrice(total)}</h4>
-                            </div>
-                            <button class="buy-button" onclick="checkoutCart()">
-                                Proceed to Checkout
-                            </button>
+                        <div class="total-amount">
+                            Total: <span id="total-amount"></span>
                         </div>
                     </div>
-                `;
-            }
+                </div>
+            </div>
+            <div class="invoice-footer">
+                <button onclick="closeInvoice()" class="close-invoice">Close</button>
+                <button onclick="printInvoice()" class="print-invoice">
+                    <i class="fas fa-print"></i> Print
+                </button>
+            </div>
+        </div>
+    </div>
 
-            modal.classList.add('active');
-        });
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About Us</h3>
+                <p>Your trusted source for premium digital products and templates.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>Email: support@digitalstore.com</p>
+                <p>Phone: +62 812-3456-7890</p>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 DigitalStore. All rights reserved.</p>
+        </div>
+    </footer>
 
-        const removeFromCart = (productId) => {
-            cartItems = cartItems.filter(item => item.id !== productId);
-            updateCart();
-            cartIcon.click(); // Refresh cart modal
-        };
+    <script>
+function openPopup(productName, productPrice, description) {
+    document.getElementById('popupOverlay').style.display = 'flex';
+    document.getElementById('popup-product-name').textContent = productName;
+    document.getElementById('popup-product-description').textContent = description;
+    document.getElementById('popup-product-price').textContent = productPrice;
+}
 
-        const checkoutCart = () => {
-            const total = cartItems.reduce((sum, item) => sum + item.price, 0);
-            showCheckoutForm(cartItems[0].id); // For simplicity, use first item's ID
-        };
+function closePopup() {
+    document.getElementById('popupOverlay').style.display = 'none';
+    document.getElementById('payment-info').innerHTML = '';
+}
 
-        const addToCart = (productId) => {
-            const product = products.find(p => p.id === productId);
-            cartItems.push(product);
-            updateCart();
-            
-            // Show notification
-            const notification = document.createElement('div');
-            notification.style.cssText = `
-                position: fixed;
-                bottom: 20px;
-                right: 20px;
-                background: #22c55e;
-                color: white;
-                padding: 1rem 1.5rem;
-                border-radius: 8px;
-                box-shadow: var(--card-shadow);
-                animation: slideIn 0.3s ease-out;
-                z-index: 1000;
-            `;
-            notification.textContent = 'Product added to cart';
-            document.body.appendChild(notification);
+function handlePaymentChange() {
+    const paymentMethod = document.getElementById('payment').value;
+    const paymentInfo = document.getElementById('payment-info');
+    
+    if (paymentMethod === 'qris') {
+        paymentInfo.innerHTML = `
+            <h4>Scan QRIS Code</h4>
+            <img src="https://h2rsi9anqnqbkvkf.public.blob.vercel-storage.com/tumblr_3593007ceb13c8a1d22fb8cde783dcb0_981d80e1_1280-btuMZoAibHYVcvPMYLr8PRVlX5kxNl.jpg" alt="QRIS Code">
+            <p>Scan the QR code above to complete your payment</p>
+        `;
+    } else if (paymentMethod === 'bank') {
+        paymentInfo.innerHTML = `
+            <h4>Bank Transfer Details</h4>
+            <p>Bank: BCA</p>
+            <p>Account Number: 2470663343</p>
+            <p>Account Name: Angger Aji Prayogo Kusuma</p>
+            <p>Please transfer the exact amount and confirm your payment</p>
+        `;
+    } else {
+        paymentInfo.innerHTML = '';
+    }
+}
 
-            setTimeout(() => {
-                notification.remove();
-            }, 3000);
-        };
+function showInvoice() {
+    document.getElementById('invoice').style.display = 'flex';
+}
 
-        // Initialize the store
-        renderProducts();
-    </script>
+function closeInvoice() {
+    document.getElementById('invoice').style.display = 'none';
+}
+
+function printInvoice() {
+    window.print();
+}
+
+document.getElementById('purchase-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const paymentMethod = document.getElementById('payment').value;
+    
+    document.getElementById('customer-name').textContent = name;
+    document.getElementById('customer-email').textContent = email;
+    document.getElementById('invoice-product-name').textContent = document.getElementById('popup-product-name').textContent;
+    document.getElementById('invoice-product-price').textContent = document.getElementById('popup-product-price').textContent;
+    document.getElementById('invoice-payment-method').textContent = paymentMethod === 'qris' ? 'QRIS' : 'Bank Transfer (BCA)';
+    document.getElementById('total-amount').textContent = document.getElementById('popup-product-price').textContent;
+    
+    closePopup();
+    showInvoice();
+});</script>
 </body>
 </html>
