@@ -9,28 +9,28 @@ const products = [
         name: "Ebook Panduan Pemrograman",
         price: 15000,
         discount: 10,
-        imageUrl: "", // URL gambar produk 1
+        imageUrl: "assets/img/product.png", // URL gambar produk 1
     },
     {
         id: 2,
         name: "Template Desain Grafis",
          price: 20000,
-         discount: 0,
-         imageUrl: "https://placekitten.com/201/201", // URL gambar produk 2
+         discount: 20,
+         imageUrl: "assets/img/product.png", // URL gambar produk 2
     },
     {
         id: 3,
         name: "Kursus Video Editing",
         price: 25000,
          discount: 15,
-          imageUrl: "https://placekitten.com/202/202", // URL gambar produk 3
+          imageUrl: "assets/img/product.png", // URL gambar produk 3
     },
     {
         id: 4,
         name: "Preset Lightroom Mobile",
          price: 30000,
          discount: 20,
-          imageUrl: "https://placekitten.com/203/203", // URL gambar produk 4
+          imageUrl: "assets/img/product.png", // URL gambar produk 4
      },
 ];
 
