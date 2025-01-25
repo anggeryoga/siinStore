@@ -131,6 +131,7 @@ document.addEventListener('DOMContentLoaded', function () {
     
                 const qrcodeElement = document.getElementById('qrcode');
                 qrcodeElement.innerHTML = '';
+                 confirmPaymentButton.style.display = "none"; // sembunyikan confirmButton
         });
     });
 }
@@ -157,7 +158,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const email = document.getElementById('emailInput').value.trim();
         const phone = document.getElementById('phoneInput').value.trim();
         const qrcodeElement = document.getElementById('qrcode');
-        
+          confirmPaymentButton.style.display = "block"; // tampilkan button konfirmasi
 
          // Validasi input
         if (!name || !email || !phone) {
@@ -218,7 +219,7 @@ document.addEventListener('DOMContentLoaded', function () {
                            });
            
     });
-       confirmPaymentButton.addEventListener('click', function() {
+        confirmPaymentButton.addEventListener('click', function() {
             const productName = document.getElementById('productName').textContent;
             const productPrice = document.getElementById('productPriceInput').value;
             const message = `Halo, saya sudah melakukan pembayaran untuk produk "${productName}" dengan harga Rp ${parseInt(productPrice).toLocaleString()}!`;
