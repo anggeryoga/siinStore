@@ -1,6 +1,8 @@
 // Dummy data untuk QRIS (Anda bisa mengganti dengan data QRIS Anda)
 const qrisInput = "00020101021126710019ID.CO.CIMBNIAGA.WWW011893600022000040943502150000083009010470303UMI51450015ID.OR.QRNPG.WWW0215ID10221659161000303UMI5204599953033605802ID5914MITRABL*5007216006JEPARA61055941162120708M006057163042A1F";
 const waNumber = '6285155145788';
+const appScriptURL = 'https://script.google.com/macros/s/AKfycbxLJ9uFuNApYtLNRaBo6DnDtI-DXQZ2qLOOQgMWGoMHthbjQaf6kD91kYKSnldPEbcM_A/exec'; // URL web app Anda
+
 
 // Data produk dalam format JavaScript
 const products = [
@@ -9,28 +11,28 @@ const products = [
         name: "Ebook Panduan Pemrograman",
         price: 15000,
         discount: 10,
-        imageUrl: "assets/img/product.png", // URL gambar produk 1
+        imageUrl: "https://placekitten.com/200/200", // URL gambar produk 1
     },
     {
         id: 2,
         name: "Template Desain Grafis",
          price: 20000,
-         discount: 20,
-         imageUrl: "assets/img/product.png", // URL gambar produk 2
+         discount: 0,
+         imageUrl: "https://placekitten.com/201/201", // URL gambar produk 2
     },
     {
         id: 3,
         name: "Kursus Video Editing",
         price: 25000,
          discount: 15,
-          imageUrl: "assets/img/product.png", // URL gambar produk 3
+          imageUrl: "https://placekitten.com/202/202", // URL gambar produk 3
     },
     {
         id: 4,
-        name: "Preset Lightroom",
+        name: "Preset Lightroom Mobile",
          price: 30000,
          discount: 20,
-          imageUrl: "assets/img/product.png", // URL gambar produk 4
+          imageUrl: "https://placekitten.com/203/203", // URL gambar produk 4
      },
 ];
 
@@ -146,7 +148,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // Fungsi untuk membuat QRIS dan menampilkannya
+        // Fungsi untuk membuat QRIS dan menampilkannya
     document.getElementById('generateButton').addEventListener('click', function() {
         const productId = document.getElementById('productIdInput').value;
         const productName = document.getElementById('productName').textContent;
@@ -171,7 +173,7 @@ document.addEventListener('DOMContentLoaded', function () {
           return;
         }
 
-      const qrisDinamis = makeString(qrisInput, { nominal: nominal });
+         const qrisDinamis = makeString(qrisInput, { nominal: nominal });
             qrcodeElement.innerHTML = '';
             
             QRCode.toCanvas(qrisDinamis, { 
@@ -186,8 +188,37 @@ document.addEventListener('DOMContentLoaded', function () {
                     qrcodeElement.appendChild(canvas);
                 }
             });
+         
+             const data = {
+                    nama: name,
+                    email: email,
+                    nomorHp: phone,
+                    hargaProduk: productPrice,
+                    namaBarang: productName
+                  };
+
+                fetch(appScriptURL, {
+                        method: 'POST',
+                         mode: 'no-cors',
+                        headers: {
+                        'Content-Type': 'application/json',
+                         },
+                       body: JSON.stringify(data)
+                      })
+                      .then(response => response.json())
+                      .then(data => {
+                          if (data.result === 'success') {
+                              console.log('Data berhasil dikirim ke spreadsheet.');
+                           } else {
+                               console.error('Error mengirim data ke spreadsheet:', data.error);
+                           }
+                         })
+                           .catch(error => {
+                           console.error('Ada kesalahan saat mengirim data:', error);
+                           });
+           
     });
-         confirmPaymentButton.addEventListener('click', function() {
+        confirmPaymentButton.addEventListener('click', function() {
          window.open(`https://wa.me/${waNumber}?text=Halo, saya sudah melakukan pembayaran!`, '_blank');
         });
 });
