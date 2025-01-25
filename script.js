@@ -17,7 +17,7 @@ const products = [
         id: 2,
         name: "Template Desain Grafis",
          price: 20000,
-         discount: 0,
+         discount: 10,
          imageUrl: "assets/img/product.png", // URL gambar produk 2
     },
     {
@@ -29,7 +29,7 @@ const products = [
     },
     {
         id: 4,
-        name: "Preset Lightroom Mobile",
+        name: "Preset Lightroom",
          price: 30000,
          discount: 20,
           imageUrl: "assets/img/product.png", // URL gambar produk 4
