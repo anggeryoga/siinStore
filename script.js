@@ -27,7 +27,7 @@ const products = [
     },
     {
         id: 4,
-        name: "Preset Lightroom Mobile",
+        name: "Preset Lightroom",
          price: 30000,
          discount: 20,
           imageUrl: "assets/img/product.png", // URL gambar produk 4
