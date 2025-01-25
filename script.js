@@ -17,7 +17,7 @@ const products = [
         id: 2,
         name: "Template Desain Grafis",
          price: 20000,
-         discount: 0,
+         discount: 15,
          imageUrl: "assets/img/product.png", // URL gambar produk 2
     },
     {
