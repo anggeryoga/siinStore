@@ -17,7 +17,7 @@ const products = [
         id: 2,
         name: "Template Desain Grafis",
          price: 20000,
-         discount: 15,
+         discount: 0,
          imageUrl: "assets/img/product.png", // URL gambar produk 2
     },
     {
@@ -218,7 +218,10 @@ document.addEventListener('DOMContentLoaded', function () {
                            });
            
     });
-        confirmPaymentButton.addEventListener('click', function() {
-         window.open(`https://wa.me/${waNumber}?text=Halo, saya sudah melakukan pembayaran!`, '_blank');
-        });
+       confirmPaymentButton.addEventListener('click', function() {
+            const productName = document.getElementById('productName').textContent;
+            const productPrice = document.getElementById('productPriceInput').value;
+            const message = `Halo, saya sudah melakukan pembayaran untuk produk "${productName}" dengan harga Rp ${parseInt(productPrice).toLocaleString()}!`;
+          window.open(`https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`, '_blank');
+       });
 });
