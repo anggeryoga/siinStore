@@ -29,7 +29,7 @@ const products = [
     },
     {
         id: 4,
-        name: "terbaru",
+        name: "Template Canva terbaru",
          price: 30000,
          discount: 20,
           imageUrl: "assets/img/img4.png", // URL gambar produk 4
