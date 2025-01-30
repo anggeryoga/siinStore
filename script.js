@@ -22,7 +22,7 @@ const products = [
     },
     {
         id: 3,
-        name: "Teknik Copywriting Pemula",
+        name: "Teknik Copywriting",
         price: 25000,
          discount: 15,
           imageUrl: "assets/img/product.png", // URL gambar produk 3
