@@ -8,28 +8,28 @@ const appScriptURL = 'https://script.google.com/macros/s/AKfycbxLJ9uFuNApYtLNRaB
 const products = [
    {
         id: 1,
-        name: "Ebook Panduan Pemrograman",
+        name: "Template Notion Content Planer",
         price: 15000,
         discount: 10,
         imageUrl: "assets/img/product.png", // URL gambar produk 1
     },
     {
         id: 2,
-        name: "Template Desain Grafis",
+        name: "Promt Ampun Chat GPT",
          price: 20000,
          discount: 10,
          imageUrl: "assets/img/product.png", // URL gambar produk 2
     },
     {
         id: 3,
-        name: "Kursus Video Editing",
+        name: "Teknik Copywriting Pemula",
         price: 25000,
          discount: 15,
           imageUrl: "assets/img/product.png", // URL gambar produk 3
     },
     {
         id: 4,
-        name: "Preset Lightroom",
+        name: "Template Canva terbaru",
          price: 30000,
          discount: 20,
           imageUrl: "assets/img/product.png", // URL gambar produk 4
