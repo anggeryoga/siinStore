@@ -11,28 +11,28 @@ const products = [
         name: "Template Notion Content Planer",
         price: 15000,
         discount: 10,
-        imageUrl: "assets/img/product.png", // URL gambar produk 1
+        imageUrl: "assets/img/img1.png", // URL gambar produk 1
     },
     {
         id: 2,
         name: "Promt Ampun Chat GPT",
          price: 20000,
          discount: 10,
-         imageUrl: "assets/img/product.png", // URL gambar produk 2
+         imageUrl: "assets/img/img2.png", // URL gambar produk 2
     },
     {
         id: 3,
         name: "Teknik Copywriting Pemula",
         price: 25000,
          discount: 15,
-          imageUrl: "assets/img/product.png", // URL gambar produk 3
+          imageUrl: "assets/img/img3.png", // URL gambar produk 3
     },
     {
         id: 4,
-        name: "Template Canva terbaru",
+        name: "terbaru",
          price: 30000,
          discount: 20,
-          imageUrl: "assets/img/product.png", // URL gambar produk 4
+          imageUrl: "assets/img/img4.png", // URL gambar produk 4
      },
 ];
 
